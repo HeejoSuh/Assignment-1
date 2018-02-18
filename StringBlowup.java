@@ -23,31 +23,6 @@ import java.util.Scanner;
 
 //****************************************************************************
 public class StringBlowup {
-
-	//-----------------------------------------
-		//for return methods
-			     //return type is Int
-	    public static Integer toNumber(String str){
-		//Gets the input from the user
-	    	//Checks if Integer
-	    	
-	    	Integer numerical;
-	    	try {
-	    		//check if character is a number
-	    		numerical = Integer.parseInt(str);//Convert string to integer
-	    		
-				//if it's a number then return the value
-	    		return numerical;
-	    		
-	    	} catch (NumberFormatException stringInput) {
-	    		//if not number then return null
-	    		return null;
-	    	}
-	    	
-	    }//closing for toNumber
-	   
-	
-	  
 	    
 	    //-----------------------------------------    
 	    public static void main(String[] args) {
@@ -81,7 +56,8 @@ public class StringBlowup {
 	    	    		//need to convert char to string
 	    	             String currentChar = String.valueOf(input.charAt(character));
 	    	             //if character is a number
-	    	             if (toNumber(currentChar) != null) {
+	    	             try {
+	    	     	    	Integer characterNumber = Integer.parseInt(currentChar);//Convert string to integer
 	    	            	 //Check if it's the last value
 	    	            	 if (character == input.length()-1) {
 	    	            		 //if number is at the last place, skip it since no characters are on the right of it
@@ -89,11 +65,11 @@ public class StringBlowup {
 	    	            		 //if number is not at the last place
 	    	            		 String charAfter = String.valueOf(input.charAt(character+1));
 	    	            		 //add that many of the following characters to string
-    	            			 for ( int number=0; number<toNumber(currentChar); number++ ) { 
+    	            			 for ( int number=0; number<characterNumber; number++ ) { 
     	            				 outputString = outputString + charAfter;
     	            			 }
 	    	            	 }
-	    	             }else {
+	    	             } catch (NumberFormatException stringInput) {
 	    	            	 //if not a number
 	    	            	 outputString = outputString + currentChar;
 	    	             }
